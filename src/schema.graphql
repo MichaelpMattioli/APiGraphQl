@@ -1,0 +1,62 @@
+type Usuario {
+    id: ID!
+    nome: String!
+    idade: Int
+    comentarios: [Comentario!]!
+    posts: [Post!]!
+    reacoes: [Reacao!]!
+}
+type Comentario {
+    id: ID! 
+    texto: String!
+    autor: Usuario!
+    post: Post!
+}
+type Post {
+    id: ID! 
+    texto: String!
+    autor: Usuario!
+    comentario: [Comentario!]!
+    reacoes: [Reacao!]!
+}
+type Reacao {
+    id: ID!
+    autor: Usuario!
+    post: Post!
+    tipo: String!
+}
+type Query {
+  usuarios: [Usuario!]!
+  comentarios: [Comentario!]!
+  posts: [Post!]!
+  reacoes: String!
+}
+type Mutation {
+    inputUser(usuario: InputUsuario): Usuario!
+    inputComentario(comentario: InputComentario): Comentario!
+    inputPost(post: InputPost): Post!
+    inputReacao(reacao: InputReacao): Reacao!
+}
+
+input InputUsuario {
+  nome: String!
+  idade: Int
+}
+
+input InputPost {
+    texto: String!,
+    autor: ID!
+}
+
+input InputComentario {
+    texto: String!,
+    autor: ID!,
+    post: ID!
+}
+
+input InputReacao {
+    tipo: String!,
+    autor: ID!,
+    post: ID!
+}
+
